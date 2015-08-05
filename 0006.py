@@ -1,4 +1,6 @@
 #-*coding:utf-8*-
+#存在问题,数字的小数点
+#单词出现次数相同问题已解决
 
 import re, glob
 
@@ -6,6 +8,8 @@ word_dict = {}
 
 def get_name():
 	lis = glob.glob('*.txt')
+	if not lis:
+		raise Exception('have no file')
 	return lis
 
 def num_of_words():

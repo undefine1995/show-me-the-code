@@ -1,5 +1,5 @@
 #-*coding:utf-8*-
-
+#存在问题,数字的小数点
 import re
 
 filename = 'text.txt'
