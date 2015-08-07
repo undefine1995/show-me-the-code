@@ -7,11 +7,11 @@ from xml.dom import minidom
 def xls2dict(filename, sheetname):
     fp = xlrd.open_workbook(filename)
     table = fp.sheet_by_name(sheetname)
-    result = {}
+    result = []
     for row in range(table.nrows):
-        result[str(int(table.cell(row, 0).value))] = []
-        for col in range(1,table.ncols):
-            result[str(int(table.cell(row, 0).value))].append(table.cell(row, col).value)
+        result.append([])
+        for col in range(table.ncols):
+            result[row].append(table.cell(row, col).value)
 
     return result
 
@@ -21,10 +21,10 @@ def create_xml(info, filename):
     root = doc.createElement('root')
     doc.appendChild(root)
     #student
-    student = doc.createElement('student')
+    student = doc.createElement('number')
     root.appendChild(student)
     #注释
-    comment = doc.createComment('\t学生信息表\n    "id" : [名字, 数学, 语文, 英文]')
+    comment = doc.createComment('数字信息')
     student.appendChild(comment)
     #student中text
     text = doc.createTextNode(str(info))
@@ -35,5 +35,5 @@ def create_xml(info, filename):
 
 
 if __name__ == '__main__':
-    info = xls2dict('student.xls', 'student')
+    info = xls2dict('numbers.xls', 'numbers')
     create_xml(info, 'test.xml')
